@@ -17,7 +17,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 
 
-const rand = () => Math.floor(Math.random() * 100);
+const rand = () => Math.floor(Math.random() * 1000);
 
 const maxSizeLine = {
     width: 1000,
@@ -27,7 +27,8 @@ const maxSizeLine = {
 
 const sizeNewLines = (list) => {
     const width = list.length > 10 ? ((maxSizeLine.width - (maxSizeLine.indent * list.length)) / list.length) : 40;
-    const heightList = list;
+    const maxValue = Math.max.apply(null, list);
+    const heightList = list.map(item => item * 100 / maxValue);
     const indent = maxSizeLine.indent;
     return {width, heightList, indent};
 };
