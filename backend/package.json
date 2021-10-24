@@ -1,0 +1,32 @@
+{
+  "name": "backend",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "server": "nodemon index",
+    "dev": "concurrently \"npm run server\"",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "bull": "^3.22.7",
+    "cors": "^2.8.5",
+    "dateformat": "^4.5.1",
+    "express": "^4.17.1",
+    "jest": "^27.3.1",
+    "morgan": "^1.10.0",
+    "socket.io": "^4.3.1"
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.2",
+    "lib": "^4.3.3",
+    "mongodb": "^3.6.5",
+    "nodemon": "^2.0.7"
+  }
+}
