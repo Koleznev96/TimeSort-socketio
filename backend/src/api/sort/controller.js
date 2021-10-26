@@ -1,3 +1,4 @@
+const fs = require('fs');
 const errorHandler = require('../../utils/errorHandler');
 
 const { my_sort } = require('../../functional/my_sort');
@@ -15,7 +16,7 @@ const outputSocketItems = async (list_Data) => {
         listTimout.push(setTimeout(() => {
             const status = index !== list_Data.length - 1;
             io.emit('new_iteration_sort', {data: item, status});
-        }, 400 * index));
+        }, 250 * index));
     });
 }
 
@@ -38,6 +39,33 @@ module.exports.stop_sort = async function(req, res) {
             await stop_iterations_sort(listTimout);
         }
         res.status(201).json({message: "Сортировка остановлена"});
+    } catch(e) {
+        errorHandler(res, e);
+        throw e;
+    }
+}
+
+module.exports.file_list = async function(req, res) {
+    try {
+        let file_list = fs.readdirSync('uploads');
+        res.status(201).json(file_list);
+    } catch(e) {
+        errorHandler(res, e);
+        throw e;
+    }
+}
+
+module.exports.input_file = async function(req, res) {
+    try {
+        const urlFile = req.file ? req.file.path : null;
+        console.log(req.file)
+        if (urlFile) {
+            fs.readFile(urlFile, 'utf8', async function (err, data) {
+                const data_list = await JSON.parse(data);
+                res.status(201).json(data_list);
+            });
+        }
+        res.status(403).json({message: "что то пошло не так"});
     } catch(e) {
         errorHandler(res, e);
         throw e;

@@ -4,11 +4,16 @@ import io from 'socket.io-client';
 
 export const useSort = () => {
   const [data, setData] = useState(null);
+  const [strMass, setAtrMass] = useState(null);
   const [isStatusSort, setIsStatusSort] = useState(false);
   const socketRef = useRef(null);
 
   const stopSort = () => {
     setIsStatusSort(false);
+  }
+
+  const initStrMass = (str) => {
+    setAtrMass(str);
   }
 
   useEffect(() => {
@@ -26,5 +31,5 @@ export const useSort = () => {
     };
   }, []);
 
-  return { data, isStatusSort, stopSort };
+  return { data, strMass, initStrMass, isStatusSort, stopSort };
 };

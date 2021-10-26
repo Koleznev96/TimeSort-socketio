@@ -6,11 +6,11 @@ import { SortContext } from '../context/sortContext';
 import { RootApp } from './RootApp/RootApp';
 
 function App() {
-  const { data, isStatusSort, stopSort } = useSort();
+  const { data, strMass, initStrMass, isStatusSort, stopSort } = useSort();
 
   return (
     <SortContext.Provider
-      value={{data, isStatusSort, stopSort}}
+      value={{data, strMass, initStrMass, isStatusSort, stopSort}}
     >
         <RootApp />
     </SortContext.Provider>

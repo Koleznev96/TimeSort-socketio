@@ -1,6 +1,9 @@
 import React, {useEffect, useState, useContext} from 'react';
 
 import {useHttp} from '../../hooks/http.hook';
+import { SortContext } from '../../context/sortContext';
+
+import {InputFile} from "./InputFile/InputFile";
 
 import {Paper} from "@mui/material";
 import {Box} from "@mui/material";
@@ -8,8 +11,6 @@ import {Container} from "@mui/material";
 import {Button} from "@mui/material";
 import {TextField} from '@mui/material';
 import {Typography} from '@mui/material';
-
-import { SortContext } from '../../context/sortContext';
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -56,6 +57,10 @@ export const ViewSort = () => {
     useEffect(() => {
         if (rootSort.data) setMass(rootSort.data);
     }, [rootSort.data]);
+
+    useEffect(() => {
+        if (rootSort.strMass) setStrMass(rootSort.strMass);
+    }, [rootSort.strMass]);
 
     useEffect(() => {
         try {
@@ -169,6 +174,8 @@ export const ViewSort = () => {
                         <Typography variant="caption" color="red">
                             {errorMassage}
                         </Typography>
+
+                        <InputFile />
                     </Paper>
 
                     <Paper
@@ -213,8 +220,8 @@ export const ViewSort = () => {
                                 value={typeSort}
                                 onChange={(value) => typeSortHandler(value.target.value)}
                             >
-                                <FormControlLabel value={0} control={<Radio />} label="Reverse: False" />
-                                <FormControlLabel value={1} control={<Radio />} label="Reverse: True" />
+                                <FormControlLabel value={0} control={<Radio />} label="По возростанию" />
+                                <FormControlLabel value={1} control={<Radio />} label="По убыванию" />
                             </RadioGroup>
                         </FormControl>
 
