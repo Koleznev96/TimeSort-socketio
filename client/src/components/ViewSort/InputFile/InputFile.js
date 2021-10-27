@@ -6,33 +6,12 @@ import { SortContext } from '../../../context/sortContext';
 
 import {Button, Typography, Box, List, ListItem} from "@mui/material";
 
-import fs from "fs";
-
 
 export const InputFile = () => {
     const rootSort = useContext(SortContext);
-    const {request, error, clearError} = useHttp();
+    const {request} = useHttp();
     const [listFiles, setListFiles] = useState([]);
     const [errorMass, setErrorMass] = useState({file: "", message: ""});
-
-    // const downloadFileHandler = async () => {
-    //     // console.log(file);
-    //     // let uploadData = await new FormData(file);
-    //     // console.log(uploadData);
-    //     // uploadData.append('file', {type: 'json', uri: file, name: 'test-1.json'});
-    //     try {
-    //         const data = await request('/api/sort/input_file', 'POST', {file});
-    //         // rootSort.setData([1, 5, 8, 3, 5, -1, 5, 8, -10, 4]);
-    //     } catch (e) {}
-    //     rootSort.initStrMass("1, 5, 8, 3, 5, -1, 5, 8, -100, 4");
-    // };
-
-    // const inputFileHandler = async (value) => {
-    //     let reader = new FileReader(value.target.files[0]);
-    //     console.log(reader)
-    //     let file = value.target.files[0];
-    //     setFile(file);
-    // };
 
     const getListFiles = async () => {
         try {
@@ -82,31 +61,6 @@ export const InputFile = () => {
                     </ListItem>
                 ))}
             </List>
-            {/*<Button*/}
-            {/*    variant="contained"*/}
-            {/*    component="label"*/}
-            {/*>*/}
-            {/*    Upload File*/}
-            {/*    <input*/}
-            {/*        type="file"*/}
-            {/*        hidden*/}
-            {/*        onChange={(value) => inputFileHandler(value)}*/}
-            {/*    />*/}
-            {/*</Button>*/}
-
-            {/*<Typography*/}
-            {/*    variant="caption"*/}
-            {/*    sx={{marginLeft: 2}}*/}
-            {/*>*/}
-            {/*    {file ? String(file) : null}*/}
-            {/*</Typography>*/}
-
-            {/*<Button*/}
-            {/*    sx={{marginLeft: 2}}*/}
-            {/*    onClick={() => downloadFileHandler()}*/}
-            {/*>*/}
-            {/*    Загрузить значения*/}
-            {/*</Button>*/}
         </Box>
     );
 }

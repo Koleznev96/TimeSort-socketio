@@ -58,7 +58,6 @@ module.exports.file_list = async function(req, res) {
 module.exports.input_file = async function(req, res) {
     try {
         const urlFile = req.file ? req.file.path : null;
-        console.log(req.file)
         if (urlFile) {
             fs.readFile(urlFile, 'utf8', async function (err, data) {
                 const data_list = await JSON.parse(data);

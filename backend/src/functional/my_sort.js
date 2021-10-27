@@ -18,10 +18,8 @@ const getMinRun = (n) => {
     return n + r;
 }
 
-// (Сортировка вставками) эта функция сортирует массив из левого индекса в
-// к правому индексу, размер которого не превышает minRun
+// Сортировка вставками
 const insertionSort = (arr, left, right, key, cmp) => {
-    console.log(cmp)
     let list_items_iterations_sort = [];
     for (let i = left + 1; i <= right; i++) {
         list_items_iterations_sort.push({data: arr.slice(), red_index: i});
@@ -37,12 +35,9 @@ const insertionSort = (arr, left, right, key, cmp) => {
     return list_items_iterations_sort;
 }
 
-// (Сортировка слиянием) эта функция объединяет отсортированные прогоны
+// Сортировка слиянием
 const merge = (arr, l, m, r, key, cmp) => {
     let list_items_iterations_sort = [];
-
-    // исходный массив разбит на две части
-    // левый и правый массив
     let len1 = m - l + 1;
     let len2 = r - m;
     let left = [];
@@ -63,7 +58,6 @@ const merge = (arr, l, m, r, key, cmp) => {
     let k = l;
 
     // после сравнения мы объединяем эти два массива
-    // в большем подмассиве
     while (i < len1 && j < len2) {
         if (cmp(key(left[i]), key(right[j])) !== Compare.BIGGER_THAN) {
             arr[k] = left[i];
@@ -95,8 +89,7 @@ const merge = (arr, l, m, r, key, cmp) => {
     return list_items_iterations_sort;
 }
 
-// итеративная функция TimSort для сортировки
-// массив [0 ... n-1] (аналог сортировки слиянием)
+// TimSort
 const my_sort = (arr, reverse = false, key = null, cmp = null) => {
     key = key ? key : defaultKey;
     cmp = cmp ? cmp : defaultCompare;
@@ -113,18 +106,10 @@ const my_sort = (arr, reverse = false, key = null, cmp = null) => {
     // начинаем слияние с размера minRun (или 32). Будет сливаться
     // сформировать размер 2*minRun, затем 4*minRun, 8*minRun и т. д.
     for (let size = minRun; size < length; size = 2*size) {
-        // выбрать начальную точку левого подмассива. Мы
-        // собираемся объединить arr [left..left + size-1]
-        // и arr [left + size, left + 2 * size-1]
-        // После каждого слияния мы увеличиваем влево на 2 * размер
         for (let left = 0; left < length; left += 2*size){
-            // найти конечную точку левого подмассива
-            // середина + 1 - начальная точка правого подмассива
             let mid = left + size - 1;
             let right = Math.min((left + 2*size - 1), (length-1));
 
-            // объединить подмассив arr [left ..... mid] &
-            // arr [mid + 1 .... right]
             list_items_iterations_sort = list_items_iterations_sort
                 .concat(merge(arr, left, mid, right, key, cmp));
         }

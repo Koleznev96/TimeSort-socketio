@@ -80,16 +80,14 @@ export const ViewSort = () => {
 
     const startSortHandler = async () => {
         try {
-            const data = await request('/api/sort/start_sort', 'POST', {mass: mass.data, reverse: typeSort});
-            console.log('start sort:', data);
+            await request('/api/sort/start_sort', 'POST', {mass: mass.data, reverse: typeSort});
         } catch (e) {}
     };
 
     const stopSortHandler = async () => {
         try {
-            const data = await  request('/api/sort/stop_sort', 'POST', null);
+            await request('/api/sort/stop_sort', 'POST', null);
             rootSort.stopSort();
-            console.log('stop sort:', data);
         } catch (e) {}
     };
 
